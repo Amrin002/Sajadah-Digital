@@ -45,11 +45,30 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean'
         ];
     }
     // Relationships
     public function lokasi()
     {
         return $this->hasMany(Lokasi::class, 'pengguna_id');
+    }
+
+    // app/Models/User.php
+
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
+    }
+
+    public function isActive(): bool
+    {
+        return $this->is_active;
     }
 }
